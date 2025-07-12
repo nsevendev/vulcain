@@ -59,15 +59,8 @@ services:
     volumes:
       - vulcain_dev_db:/data/db
       - ../docker/mongo-init:/docker-entrypoint-initdb.d
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-nseven"
-      - "traefik.http.routers.vulcain-db.rule=${HOST_TRAEFIK_DB}"
-      - "traefik.http.routers.vulcain-db.entrypoints=websecure"
-      - "traefik.http.routers.vulcain-db.tls=true"
-      - "traefik.http.routers.vulcain-db.tls.certresolver=default"
-      - "traefik.http.services.vulcain-db.loadbalancer.server.port=${PORT_DB}"
-      - "traefik.http.services.vulcain-db.loadbalancer.server.scheme=http"
+    ports:
+      - "${DB_PORT_EX:-27017}:27017"
     networks:
       - traefik-nseven
       - vulcain

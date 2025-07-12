@@ -1,3 +1,8 @@
+-include .env
+
+# Redefinir MAKEFILE_LIST pour qu'il ne contienne que le Makefile
+MAKEFILE_LIST := Makefile
+
 ENV_FILE := --env-file .env
 
 # Couleurs
@@ -6,8 +11,8 @@ YELLOW = \033[0;33m
 NC = \033[0m # No Color
 
 # Variables
-DOCKER_COMPOSE = docker compose -f docker/compose.yaml
-APP_ENV ?= dev
+COMPOSE_FILE = $(if $(filter $(APP_ENV),prod),docker/compose.prod.yaml,$(if $(filter $(APP_ENV),preprod),docker/compose.preprod.yaml,docker/compose.yaml))
+DOCKER_COMPOSE = docker compose $(ENV_FILE) -f $(COMPOSE_FILE)
 
 .PHONY: help build up down logs shell restart clean status ps
 
@@ -28,13 +33,13 @@ build-api: ## Construit uniquement l'image de l'API backend
 	$(DOCKER_COMPOSE) build api
 
 up: ## Lance tous les services
-	$(DOCKER_COMPOSE) $(ENV_FILE) -f docker/compose.yaml up -d
+	$(DOCKER_COMPOSE) up -d
 
 up-logs: ## Lance tous les services avec les logs
 	$(DOCKER_COMPOSE) up
 
 down: ## Arrête tous les services et supprime les containers
-	$(DOCKER_COMPOSE) $(ENV_FILE) -f docker/compose.yaml down
+	$(DOCKER_COMPOSE) down
 
 stop: ## Arrête tous les services
 	$(DOCKER_COMPOSE) stop
@@ -64,4 +69,4 @@ clean: ## Supprime les conteneurs, réseaux et volumes
 	$(DOCKER_COMPOSE) down -v --remove-orphans
 
 clean-all: ## Supprime tout (conteneurs, réseaux, volumes et images)
-	$(DOCKER_COMPOSE) $(ENV_FILE) -f docker/compose.yaml down -v --remove-orphans --rmi all
+	$(DOCKER_COMPOSE) down -v --remove-orphans --rmi all

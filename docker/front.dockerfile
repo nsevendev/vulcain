@@ -1,7 +1,7 @@
 FROM node:22.17.0-alpine AS base
 WORKDIR /app
 COPY package*.json ./
-COPY docker/entrypoint/entrypoint.front.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 FROM base AS dev
