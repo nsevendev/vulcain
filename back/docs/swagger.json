@@ -1,0 +1,20 @@
+{
+    "schemes": [
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "API service vulcain api",
+        "title": "vulcain api",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {},
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "headers"
+        }
+    }
+}
