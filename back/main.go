@@ -7,7 +7,9 @@ import (
 	"github.com/nsevenpack/logger/v2/logger"
 	"github.com/nsevenpack/mignosql"
 	"strings"
+	"vulcain/back/docs"
 	"vulcain/back/internal/db"
+	"vulcain/back/router"
 )
 
 func init() {
@@ -27,19 +29,21 @@ func init() {
 func main() {
 	s := gin.Default()
 	host := "0.0.0.0"
-	hostTraefik := extractStringInBacktick(env.Get("HOST_TRAEFIK"))
-	port := env.Get("PORT")
-	setSwaggerOpt(hostTraefik) // config option swagger
-	infoServer(hostTraefik)
+	hostTraefikApi := extractStringInBacktick(env.Get("HOST_TRAEFIK_API"))
+	hostTraefikDb := extractStringInBacktick(env.Get("HOST_TRAEFIK_DB"))
+	port := env.Get("PORT_API")
+	setSwaggerOpt(hostTraefikApi)             // config option swagger
+	infoServer(hostTraefikApi, hostTraefikDb) // log info server
+	router.New(s)
 
 	if err := s.Run(host + ":" + port); err != nil {
 		logger.Ef("Une erreur est survenue au lancement du serveur : %v", err)
 	}
 }
 
-func infoServer(hostTraefik string) {
-	logger.If("Lancement du serveur : https://%v", hostTraefik)
-	logger.If("Lancement du Swagger : https://%v/swagger/index.html", hostTraefik)
+func infoServer(hostTraefikApi string, hostTraefikDb string) {
+	logger.If("Lancement du serveur : https://%v", hostTraefikApi)
+	logger.If("Lancement du Swagger : https://%v/swagger/index.html", hostTraefikApi)
 }
 
 func extractStringInBacktick(s string) string {
@@ -53,8 +57,8 @@ func extractStringInBacktick(s string) string {
 	return s[start+1 : end]
 }
 
-func setSwaggerOpt(hostTraefik string) {
-	//docs.SwaggerInfo.Host = hostTraefik
+func setSwaggerOpt(hostTraefikApi string) {
+	docs.SwaggerInfo.Host = hostTraefikApi
 }
 
 func initDbAndMigNosql(appEnv string) {
