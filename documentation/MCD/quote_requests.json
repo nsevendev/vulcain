@@ -1,0 +1,38 @@
+// beaucoup de données mais a voir pour du remplissage auto pour faire gagné du temps au client
+// et qu'ils ne partent pas du site
+{
+  "_id": "ObjectId",
+  "client": {
+    "firstName": "Pierre",
+    "lastName": "Martin",
+    "email": "pierre.martin@email.fr",
+    "phone": "06 12 34 56 78",
+    "address": {
+      "street": "45 Rue de la République",
+      "city": "Paris",
+      "zipCode": "75011",
+      "department": "Paris"
+    }
+  },
+  "project": {
+    "title": "Terrasse en béton",
+    "description": "Je souhaiterais faire réaliser une terrasse en béton de 25m² dans mon jardin. Le terrain est déjà préparé.",
+    "serviceType": "maconnerie-exterieure",
+    "estimatedSurface": "25m²",
+    "urgency": "normal",
+    "preferredStartDate": "2025-08-15T00:00:00.000Z",
+    "budget": "5000-8000€",
+    "workAddress": {
+      "street": "12 Avenue des Jardins",
+      "city": "Vincennes",
+      "zipCode": "94300",
+      "department": "Val-de-Marne",
+      "isSameAsClientAddress": false
+    }
+  },
+  "status": "pending",
+  "priority": "normal",
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z",
+  "lastContactedAt": "2025-07-12T14:30:45.000Z"
+}

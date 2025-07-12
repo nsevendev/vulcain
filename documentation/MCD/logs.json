@@ -1,0 +1,13 @@
+{
+  "_id": "ObjectId",
+  "action": "CREATE_SERVICE",
+  "actionType": "CREATE",
+  "userId": "64f5a1b2c3d4e5f6a7b8c9d0",
+  "username": "admin",
+  "ipAddress": "192.168.1.100",
+  "level": "INFO",
+  "messageSuccess": "Service 'Maçonnerie Extérieure' créé avec succès",
+  "errorMessage": null,
+  "timestamp": "2025-07-12T14:30:45.000Z",
+  "createdAt": "2025-07-12T14:30:45.000Z"
+}

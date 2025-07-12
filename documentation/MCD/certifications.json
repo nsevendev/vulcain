@@ -1,0 +1,16 @@
+// cette collection est optionnelle pour le debut
+{
+  "_id": "ObjectId",
+  "name": "Garantie décennale",
+  "number": "GD-2024-12345",
+  "company": "Assurance Pro BTP",
+  "validFrom": "2024-01-01T00:00:00.000Z",
+  "validUntil": "2025-12-31T23:59:59.000Z",
+  "documentUrl": "/documents/garantie-decennale.pdf",
+  "isActive": true,
+  "createdBy": "ObjectId",
+  "lastModifiedBy": "ObjectId",
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z"
+}
+s

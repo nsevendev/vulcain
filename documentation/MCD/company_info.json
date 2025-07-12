@@ -1,0 +1,47 @@
+{
+  "_id": "ObjectId",
+  "companyName": "Maçonnerie Expert Paris",
+  "foundedDate": "2010-03-15T00:00:00.000Z",
+  "experience": "15 ans d'expérience",
+  "heroTitle": "Maçonnerie Générale - Artisans depuis 15 ans",
+  "heroSubtitle": "Spécialistes en travaux de maçonnerie, rénovation et aménagement",
+  "heroDescription": "Nous réalisons tous vos projets de maçonnerie avec professionnalisme et savoir-faire artisanal.",
+  "heroImage": "/images/hero-maconnerie.jpg",
+  "contact": {
+    "phone": "01 23 45 67 89",
+    "email": "contact@maconnerie-expert.fr",
+    "address": {
+      "street": "123 Avenue de la Construction",
+      "city": "Paris",
+      "zipCode": "75012",
+      "department": "Paris"
+    },
+    "interventionRadius": 30
+  },
+  "devisInfo": {
+    "title": "Demandez votre devis gratuit",
+    "subtitle": "Réponse rapide sous 24h",
+    "advantages": [
+      "Devis détaillé et transparent",
+      "Déplacement gratuit",
+      "Conseils personnalisés",
+      "Garantie décennale"
+    ],
+    "responseTime": "Réponse sous 24h",
+    "freeEstimate": true
+  },
+  "workingHours": {
+    "monday": "8h-18h",
+    "tuesday": "8h-18h",
+    "wednesday": "8h-18h",
+    "thursday": "8h-18h",
+    "friday": "8h-18h",
+    "saturday": "8h-12h",
+    "sunday": "Fermé"
+  },
+  "createdBy": "ObjectId",
+  "lastModifiedBy": "ObjectId",
+  "isActive": true,
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z"
+}

@@ -1,0 +1,63 @@
+{
+  "_id": "ObjectId",
+  "title": "Maçonnerie Extérieure",
+  "slug": "maconnerie-exterieure",
+  "shortDescription": "Terrasses, murets, allées et aménagements extérieurs",
+  "fullDescription": "Nous réalisons tous vos projets d'aménagement extérieur : terrasses en béton ou carrelage, murets décoratifs, allées piétonnes, barbecues maçonnés. Notre savoir-faire artisanal garantit des réalisations durables et esthétiques.",
+  "prestations": [
+    {
+      "name": "Terrasses en béton",
+      "description": "Terrasses coulées, finition lissée ou brossée",
+      "images": [
+        {
+          "url": "/images/prestations/terrasse-beton-1.jpg",
+          "alt": "Terrasse en béton lissé",
+          "order": 1
+        },
+        {
+          "url": "/images/prestations/terrasse-beton-2.jpg",
+          "alt": "Terrasse en béton brossé",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "name": "Murets et clôtures",
+      "description": "Murets décoratifs, murs de soutènement",
+      "images": [
+        {
+          "url": "/images/prestations/muret-pierre.jpg",
+          "alt": "Muret en pierre naturelle",
+          "order": 1
+        }
+      ]
+    },
+    {
+      "name": "Barbecues maçonnés",
+      "description": "Barbecues traditionnels en pierre ou brique",
+      "images": [
+        {
+          "url": "/images/prestations/barbecue-pierre.jpg",
+          "alt": "Barbecue maçonné en pierre",
+          "order": 1
+        }
+      ]
+    }
+  ],
+  "mainImage": {
+    "icon": "fas fa-tools",
+    "url": "/images/services/maconnerie-exterieure.jpg",
+    "alt": "Aménagements extérieurs en maçonnerie"
+  },
+  "order": 1,
+  "isActive": true,
+  "seo": {
+    "metaTitle": "Maçonnerie Extérieure Paris - Terrasses & Murets | Maçonnerie Expert",
+    "metaDescription": "Spécialistes en maçonnerie extérieure : terrasses béton/carrelage, murets, allées, barbecues. Devis gratuit à Paris et région.",
+    "keywords": ["terrasse", "muret", "maçonnerie extérieure", "Paris", "barbecue maçonné"]
+  },
+  "createdBy": "ObjectId",
+  "lastModifiedBy": "ObjectId",
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z"
+}

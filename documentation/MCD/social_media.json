@@ -1,0 +1,13 @@
+{
+  "_id": "ObjectId",
+  "platform": "facebook",
+  "name": "Facebook",
+  "url": "https://facebook.com/maconnerie-expert",
+  "icon": "fab fa-facebook",
+  "order": 1,
+  "isActive": true,
+  "createdBy": "ObjectId",
+  "lastModifiedBy": "ObjectId",
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z"
+}

@@ -1,0 +1,24 @@
+{
+  "_id": "ObjectId",
+  "username": "admin",
+  "email": "admin@maconnerie-expert.fr",
+  "password": "hash_bcrypt_du_mot_de_passe",
+  "firstName": "Jean",
+  "lastName": "Dupont",
+  "fullName": "Jean Dupont",
+  "roleId": "64f5a1b2c3d4e5f6a7b8c9d0",
+  "isActive": true,
+  "isEmailVerified": true,
+  "lastLogin": "2025-07-12T08:30:00.000Z",
+  "lastPasswordChange": "2025-06-01T10:00:00.000Z",
+  "loginAttempts": 0,
+  "lockedUntil": null,
+  "avatar": {
+    "url": "/images/avatars/jean-dupont.jpg",
+    "alt": "Photo de Jean Dupont"
+  },
+  "createdBy": "ObjectId",
+  "lastModifiedBy": "ObjectId",
+  "createdAt": "2025-07-12T14:30:45.000Z",
+  "updatedAt": "2025-07-12T14:30:45.000Z"
+}
