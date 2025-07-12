@@ -32,3 +32,13 @@ COPY --from=build /app/dist/application .
 COPY go.mod .
 RUN chmod +x /app/application
 CMD ["./application"]
+
+FROM golang:1.24.4-bookworm AS preprod
+WORKDIR /app
+# certificats (pour les appels HTTPS éventuels)
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+# uniquement le binaire
+COPY --from=build /app/dist/application .
+COPY go.mod .
+RUN chmod +x /app/application
+CMD ["./application"]

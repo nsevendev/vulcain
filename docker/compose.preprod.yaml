@@ -1,0 +1,73 @@
+name: vulcain-${APP_ENV}
+services:
+  app:
+    build:
+      target: ${APP_ENV}
+      context: ../front
+      dockerfile: ../docker/front.dockerfile
+    container_name: vulcain_${APP_ENV}_app
+    image: vulcain-app:${APP_ENV}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-nseven"
+      - "traefik.http.routers.vulcain-app.rule=${HOST_TRAEFIK}"
+      - "traefik.http.routers.vulcain-app.entrypoints=websecure"
+      - "traefik.http.routers.vulcain-app.tls=true"
+      - "traefik.http.routers.vulcain-app.tls.certresolver=default"
+      - "traefik.http.services.vulcain-app.loadbalancer.server.port=${PORT}"
+      - "traefik.http.services.vulcain-app.loadbalancer.server.scheme=http"
+    env_file:
+      - ../front/.env
+    networks:
+      - traefik-nseven
+      - vulcain
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  api:
+    build:
+      target: ${APP_ENV}
+      context: ../back
+      dockerfile: ../docker/back.dockerfile
+    container_name: vulcain_${APP_ENV}_api
+    image: vulcain-api:${APP_ENV}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-nseven"
+      - "traefik.http.routers.vulcain-api.rule=${HOST_TRAEFIK_API}"
+      - "traefik.http.routers.vulcain-api.entrypoints=websecure"
+      - "traefik.http.routers.vulcain-api.tls=true"
+      - "traefik.http.routers.vulcain-api.tls.certresolver=default"
+      - "traefik.http.services.vulcain-api.loadbalancer.server.port=${PORT_API}"
+      - "traefik.http.services.vulcain-api.loadbalancer.server.scheme=http"
+    env_file:
+      - ../back/.env
+    networks:
+      - traefik-nseven
+      - vulcain
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mongo:7
+    container_name: vulcain_${APP_ENV}_db
+    restart: unless-stopped
+    volumes:
+      - vulcain_${APP_ENV}_db:/data/db
+      - ../docker/mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - traefik-nseven
+      - vulcain
+    environment:
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+
+networks:
+  traefik-nseven:
+    external: true
+  vulcain:
+    driver: bridge
+
+volumes:
+  vulcain_${APP_ENV}_db:
