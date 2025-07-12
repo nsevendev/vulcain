@@ -10,14 +10,7 @@ dans le fichier `/etc/hosts` (attention utiliser `sudo` pour modifier ce fichier
 
 ## Mode dev  
 - lancer la commande `make up`
-- accèder aux logs (commande `make logs-api`) de l'api pour voir l'url du swagger  
-- voir toutes les commandes disponibles avec `make`
-
-## Fonctionnement fichier `.env`  
-- il y a 3 fichiers `.env` :  
-  - `.env` : ce fichier à la racine du repo, sert pour le lancement des containeurs docker  
-    et contient des infos pour traefik et les ports utilisés par les services (tous les conteneurs)
-  - `back/.env` : contient des variable specifiques à l'api
-  - `front/.env` : contient des variable specifiques à l'aoolication front end.  
-
-**ATTENTION les variables APP_ENV doivent toutes etre avec la meme valeur**  
+- accèder aux logs (commande `make logs-api`) de l'api pour voir l'url du swagger ou l'url de l'api  
+- accèder aux logs (commande `make logs-front`) de l'application front end pour voir l'url de l'application  
+- accèder à l'application front end à l'adresse `https://vulcain.local`  
+- voir toutes les commandes disponibles avec `make`  
