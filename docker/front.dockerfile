@@ -15,24 +15,20 @@ WORKDIR /app
 COPY package*.json ./
 RUN bun install
 COPY . .
-RUN bun run build
+RUN bun run build.client && bun run build.server
 
-FROM oven/bun:1-alpine AS prod
+# Base runtime commune
+FROM oven/bun:1-alpine AS runtime-base
 WORKDIR /app
 RUN apk add --no-cache dumb-init
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/server ./server
 COPY --from=build /app/package*.json ./
 RUN bun install --production
 USER bun
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["bun", "run", "serve"]
 
-FROM oven/bun:1-alpine AS preprod
-WORKDIR /app
-RUN apk add --no-cache dumb-init
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/package*.json ./
-RUN bun install --production
-USER bun
-ENTRYPOINT ["dumb-init", "--"]
-CMD ["bun", "run", "serve"]
+# Environnements spécifiques
+FROM runtime-base AS prod
+FROM runtime-base AS preprod
