@@ -13,9 +13,8 @@ services:
       - "traefik.http.routers.vulcain-app.rule=${HOST_TRAEFIK}"
       - "traefik.http.routers.vulcain-app.entrypoints=websecure"
       - "traefik.http.routers.vulcain-app.tls=true"
-      - "traefik.http.routers.vulcain-app.tls.certresolver=default"
+      - "traefik.http.routers.vulcain-app.tls.certresolver=le"
       - "traefik.http.services.vulcain-app.loadbalancer.server.port=${PORT}"
-      - "traefik.http.services.vulcain-app.loadbalancer.server.scheme=http"
     env_file:
       - ../front/.env
     networks:
@@ -38,9 +37,8 @@ services:
       - "traefik.http.routers.vulcain-api.rule=${HOST_TRAEFIK_API}"
       - "traefik.http.routers.vulcain-api.entrypoints=websecure"
       - "traefik.http.routers.vulcain-api.tls=true"
-      - "traefik.http.routers.vulcain-api.tls.certresolver=default"
+      - "traefik.http.routers.vulcain-api.tls.certresolver=le"
       - "traefik.http.services.vulcain-api.loadbalancer.server.port=${PORT}"
-      - "traefik.http.services.vulcain-api.loadbalancer.server.scheme=http"
     env_file:
       - ../back/.env
     networks:
