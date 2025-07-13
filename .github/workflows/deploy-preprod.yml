@@ -1,0 +1,84 @@
+name: Deploy to Preprod
+
+on:
+  push:
+    branches: [preprod]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Ionos Preprod
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.IONOS_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.IONOS_HOST }} >> ~/.ssh/known_hosts
+          
+      - name: Deploy to server
+        run: |
+          ssh ${{ secrets.IONOS_USER }}@${{ secrets.IONOS_HOST }} << 'EOF'
+            set -e
+            
+            # Navigate to project directory
+            cd ~/projects/test/vulcain
+            
+            # Backup current .env
+            cp .env .env.backup
+            
+            # Pull latest changes
+            git fetch origin
+            git checkout preprod
+            git pull origin preprod
+            
+            # Set preprod environment
+            echo "APP_ENV=preprod" > .env
+            echo "# pour traefik dans le compose" >> .env
+            echo "HOST_TRAEFIK=Host(\`vulcain.woopear.fr\`)" >> .env
+            echo "HOST_TRAEFIK_API=Host(\`vulcain-api.woopear.fr\`)" >> .env
+            echo "PORT=3000" >> .env
+            echo "PORT_API=3001" >> .env
+            echo "# access externe database" >> .env
+            echo "DB_PORT_EX=27017" >> .env
+            
+            # Update .env files for each service
+            echo "APP_ENV=preprod" > back/.env
+            echo "# connexion db en mode preprod" >> back/.env
+            echo "DB_NAME=vulcain_preprod" >> back/.env
+            echo "DB_URI=mongodb://db:27017" >> back/.env
+            echo "# pour les logs" >> back/.env
+            echo "HOST_TRAEFIK_API=Host(\`vulcain-api.woopear.fr\`)" >> back/.env
+            echo "# pour start server" >> back/.env
+            echo "PORT=3001" >> back/.env
+            echo "# info pour port db" >> back/.env
+            echo "DB_PORT_EX=27017" >> back/.env
+            
+            echo "APP_ENV=preprod" > front/.env
+            echo "NODE_ENV=production" >> front/.env
+            echo "HOST_TRAEFIK=Host(\`vulcain.woopear.fr\`)" >> front/.env
+            echo "PORT=3000" >> front/.env
+            
+            # Deploy with Docker
+            make down || true
+            make clean || true
+            make upb
+            
+            # Verify deployment
+            sleep 10
+            make logs-app --no-print-directory | head -20
+            
+          EOF
+          
+      - name: Verify deployment
+        run: |
+          # Test if services are responding
+          ssh ${{ secrets.IONOS_USER }}@${{ secrets.IONOS_HOST }} << 'EOF'
+            curl -f https://vulcain.woopear.fr/health || echo "Frontend health check failed"
+            curl -f https://vulcain-api.woopear.fr/health || echo "API health check failed"
+          EOF
