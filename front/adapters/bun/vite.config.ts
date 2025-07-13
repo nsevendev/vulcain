@@ -16,7 +16,9 @@ export default extendConfig(baseConfig, () => {
       minify: false,
     },
     plugins: [
-      bunServerAdapter(),
+      bunServerAdapter({
+        ssg: null, // Désactive complètement le SSG
+      }),
     ],
   };
 });
