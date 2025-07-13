@@ -31,7 +31,7 @@ func main() {
 	host := "0.0.0.0"
 	hostTraefikApi := extractStringInBacktick(env.Get("HOST_TRAEFIK_API"))
 	hostTraefikDb := extractStringInBacktick(env.Get("HOST_TRAEFIK_DB"))
-	port := env.Get("PORT_API")
+	port := env.Get("PORT")
 	setSwaggerOpt(hostTraefikApi)             // config option swagger
 	infoServer(hostTraefikApi, hostTraefikDb) // log info server
 	router.New(s)
