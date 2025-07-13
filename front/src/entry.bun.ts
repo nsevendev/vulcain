@@ -12,14 +12,10 @@ import { createQwikCity } from "@builder.io/qwik-city/middleware/bun";
 import qwikCityPlan from "@qwik-city-plan";
 import render from "./entry.ssr";
 
-// Import the client manifest
-const manifest = (await import("../dist/q-manifest.json")).default;
-
 // Create the Qwik City Bun middleware
 const { router, notFound, staticFile } = createQwikCity({
   render,
   qwikCityPlan,
-  manifest,
   static: {
     cacheControl: "public, max-age=31536000, immutable",
   },
