@@ -70,4 +70,4 @@ networks:
     driver: bridge
 
 volumes:
-  vulcain_${APP_ENV}_db:
+  vulcain_prod_db:
