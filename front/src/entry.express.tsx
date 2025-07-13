@@ -19,6 +19,7 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface QwikCityPlatform extends PlatformNode {}
 }
 
@@ -68,6 +69,6 @@ app.use(notFound);
 
 // Start the express server
 app.listen(PORT, () => {
-  /* eslint-disable */
+  // eslint-disable-next-line no-console
   console.log(`Server started: http://localhost:${PORT}/`);
 });
