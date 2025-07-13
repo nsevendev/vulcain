@@ -10,24 +10,21 @@ COPY . .
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["npm", "run", "dev"]
 
-FROM oven/bun:1-alpine AS build
+FROM base AS build
 WORKDIR /app
-COPY package*.json ./
-RUN bun install
 COPY . .
-RUN bun run build
+RUN npm run build
 
 # Base runtime commune
-FROM oven/bun:1-alpine AS runtime-base
+FROM node:22.17.0-alpine AS runtime-base
 WORKDIR /app
 RUN apk add --no-cache dumb-init
 COPY --from=build /app/dist ./dist
-COPY --from=build /app/server ./server
 COPY --from=build /app/package*.json ./
-RUN bun install --production
-USER bun
+RUN npm ci --production
+USER node
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["bun", "run", "serve"]
+CMD ["npm", "run", "start"]
 
 # Environnements spécifiques
 FROM runtime-base AS prod
