@@ -20,11 +20,12 @@ FROM node:22.17.0-alpine AS runtime-base
 WORKDIR /app
 RUN apk add --no-cache dumb-init
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/server ./server
 COPY --from=build /app/package*.json ./
 RUN npm ci --production
 USER node
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "serve"]
 
 # Environnements spécifiques
 FROM runtime-base AS prod
