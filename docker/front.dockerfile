@@ -15,7 +15,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN bun install
 COPY . .
-RUN bun run build.client && bun run build.server
+RUN bun run build
 
 # Base runtime commune
 FROM oven/bun:1-alpine AS runtime-base
