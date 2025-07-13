@@ -15,5 +15,6 @@ const createIfNotExists = (dbName) => {
 };
 
 createIfNotExists("vulcain_prod");
+createIfNotExists("vulcain_preprod");
 createIfNotExists("vulcain_dev");
 createIfNotExists("vulcain_test");
