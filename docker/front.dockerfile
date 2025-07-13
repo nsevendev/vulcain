@@ -13,6 +13,7 @@ CMD ["npm", "run", "dev"]
 FROM base AS build
 WORKDIR /app
 COPY . .
+RUN npm ci
 RUN npm run build
 
 # Base runtime commune
