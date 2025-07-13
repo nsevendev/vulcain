@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.vulcain-api.entrypoints=websecure"
       - "traefik.http.routers.vulcain-api.tls=true"
       - "traefik.http.routers.vulcain-api.tls.certresolver=default"
-      - "traefik.http.services.vulcain-api.loadbalancer.server.port=${PORT_API}"
+      - "traefik.http.services.vulcain-api.loadbalancer.server.port=${PORT}"
       - "traefik.http.services.vulcain-api.loadbalancer.server.scheme=http"
     env_file:
       - ../back/.env
