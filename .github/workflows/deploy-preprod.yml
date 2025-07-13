@@ -58,7 +58,7 @@ jobs:
             
             # Verify deployment
             sleep 10
-            make logs-app --no-print-directory | head -20
+            docker compose --env-file .env -f docker/compose.preprod.yaml logs --tail=20 app
             
           EOF
           
