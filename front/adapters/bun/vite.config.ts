@@ -16,7 +16,11 @@ export default extendConfig(baseConfig, () => {
       minify: false,
     },
     plugins: [
-      bunServerAdapter(),
+      bunServerAdapter({
+        ssg: {
+          include: [],
+        },
+      }),
     ],
   };
 });
