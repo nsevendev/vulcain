@@ -35,6 +35,9 @@ build-api: ## Construit uniquement l'image de l'API backend
 up: ## Lance tous les services
 	$(DOCKER_COMPOSE) up -d
 
+upb: ## rebuild l'image et lance tous les services
+	$(DOCKER_COMPOSE) up -d --build
+
 up-logs: ## Lance tous les services avec les logs
 	$(DOCKER_COMPOSE) up
 
