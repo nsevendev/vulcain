@@ -17,9 +17,27 @@ jobs:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.IONOS_SSH_KEY }}" > ~/.ssh/id_rsa
+          # Write SSH key with proper formatting
+          printf '%s\n' "${{ secrets.IONOS_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          
+          # Debug: Check key format and size
+          echo "SSH key file size:"
+          wc -c ~/.ssh/id_rsa
+          echo "SSH key first line:"
+          head -1 ~/.ssh/id_rsa
+          echo "SSH key last line:"
+          tail -1 ~/.ssh/id_rsa
+          
+          # Test SSH key format
+          ssh-keygen -l -f ~/.ssh/id_rsa
+          
+          # Add server to known hosts
           ssh-keyscan -H ${{ secrets.IONOS_HOST }} >> ~/.ssh/known_hosts
+          
+          # Test SSH connection with verbose output
+          ssh -v -o ConnectTimeout=10 -o StrictHostKeyChecking=no ${{ secrets.IONOS_USER }}@${{ secrets.IONOS_HOST }} "echo 'SSH connection successful'"
           
       - name: Deploy to server
         run: |
