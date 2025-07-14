@@ -60,7 +60,7 @@ logs-db: ## Affiche les logs de la base de données
 	$(DOCKER_COMPOSE) logs -f db
 
 shell-app: ## Ouvre un shell dans le conteneur de l'application frontend
-	$(DOCKER_COMPOSE) exec app bash
+	$(DOCKER_COMPOSE) exec app sh
 
 shell-api: ## Ouvre un shell dans le conteneur de l'API backend
 	$(DOCKER_COMPOSE) exec api bash
